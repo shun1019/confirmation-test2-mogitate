@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\Product;
+use App\Models\Season;
 use Illuminate\Http\Request;
+use App\Http\Requests\UpdateProductRequest;
 
 class ProductController extends Controller
 {
@@ -17,9 +19,11 @@ class ProductController extends Controller
     // 商品登録フォームを表示する
     public function create()
     {
-        return view('products.product_register');
+        $seasons = Season::all(); // 季節情報を取得
+        return view('products.product_register', compact('seasons'));
     }
 
+    // 商品を保存する
     public function store(Request $request)
     {
         $validated = $request->validate([
@@ -27,7 +31,7 @@ class ProductController extends Controller
             'price' => 'required|numeric|min:0',
             'image' => 'required|image|mimes:jpeg,png,jpg|max:2048',
             'season' => 'required|array',
-            'season.*' => 'string|in:春,夏,秋,冬',
+            'season.*' => 'exists:seasons,id',
             'description' => 'required|string|max:1000',
         ]);
 
@@ -35,54 +39,17 @@ class ProductController extends Controller
         $path = $request->file('image')->store('products', 'public');
 
         // 商品を保存
-        Product::create([
+        $product = Product::create([
             'name' => $validated['name'],
             'price' => $validated['price'],
             'image' => $path,
-            'season' => json_encode($validated['season']),
             'description' => $validated['description'],
         ]);
 
+        // 中間テーブルに季節を保存
+        $product->seasons()->attach($validated['season']);
+
         return redirect()->route('products.index')->with('success', '商品が登録されました。');
-    }
-
-    // 商品の詳細を表示する
-    public function show(Product $product)
-    {
-        return view('products.product_detail', compact('product'));
-    }
-
-    // 商品編集フォームを表示する
-    public function edit(Product $product)
-    {
-        return view('products.product_edit', compact('product'));
-    }
-
-    // 商品を更新する
-    public function update(Request $request, Product $product)
-    {
-        $validated = $request->validate([
-            'name' => 'required|string|max:255',
-            'price' => 'required|numeric|min:0',
-            'image' => 'nullable|image|mimes:jpeg,png,jpg|max:2048',
-            'season' => 'required|array',
-            'season.*' => 'string|in:春,夏,秋,冬',
-            'description' => 'required|string|max:1000',
-        ]);
-
-        if ($request->hasFile('image')) {
-            // 画像の保存
-            $path = $request->file('image')->store('products', 'public');
-            $product->image = $path;
-        }
-
-        $product->name = $validated['name'];
-        $product->price = $validated['price'];
-        $product->season = json_encode($validated['season']);
-        $product->description = $validated['description'];
-        $product->save();
-
-        return redirect()->route('products.show', $product->id)->with('success', '商品が更新されました。');
     }
 
     // 商品を削除する

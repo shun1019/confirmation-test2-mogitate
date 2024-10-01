@@ -8,6 +8,18 @@
 <div class="container">
     <div class="register-form mt-5">
         <h3 class="text-center">商品登録</h3>
+
+        <!-- バリデーションエラーメッセージを表示 -->
+        @if ($errors->any())
+        <div class="alert alert-danger">
+            <ul>
+                @foreach ($errors->all() as $error)
+                <li>{{ $error }}</li>
+                @endforeach
+            </ul>
+        </div>
+        @endif
+
         <form action="{{ route('products.store') }}" method="POST" enctype="multipart/form-data">
             @csrf
 
@@ -33,37 +45,28 @@
             <div class="form-group">
                 <label>季節 <span class="required">必須</span> <small>複数選択可</small></label>
                 <div class="season-checkboxes">
+                    @foreach($seasons as $season)
                     <div class="form-check form-check-inline">
-                        <input class="form-check-input" type="checkbox" name="season[]" id="spring" value="春">
-                        <label class="form-check-label" for="spring">春</label>
+                        <input class="form-check-input" type="checkbox" name="season[]" id="season_{{ $season->id }}" value="{{ $season->id }}">
+                        <label class="form-check-label" for="season_{{ $season->id }}">{{ $season->name }}</label>
                     </div>
-                    <div class="form-check form-check-inline">
-                        <input class="form-check-input" type="checkbox" name="season[]" id="summer" value="夏">
-                        <label class="form-check-label" for="summer">夏</label>
-                    </div>
-                    <div class="form-check form-check-inline">
-                        <input class="form-check-input" type="checkbox" name="season[]" id="autumn" value="秋">
-                        <label class="form-check-label" for="autumn">秋</label>
-                    </div>
-                    <div class="form-check form-check-inline">
-                        <input class="form-check-input" type="checkbox" name="season[]" id="winter" value="冬">
-                        <label class="form-check-label" for="winter">冬</label>
-                    </div>
+                    @endforeach
                 </div>
             </div>
-
-            <!-- 商品説明 -->
-            <div class="form-group">
-                <label for="description">商品説明 <span class="required">必須</span></label>
-                <textarea name="description" id="description" class="form-control" rows="4" placeholder="商品の説明を入力" required></textarea>
-            </div>
-
-            <!-- ボタン -->
-            <div class="form-group text-center">
-                <a href="{{ route('products.index') }}" class="btn btn-secondary">戻る</a>
-                <button type="submit" class="btn btn-warning">登録</button>
-            </div>
-        </form>
     </div>
+
+    <!-- 商品説明 -->
+    <div class="form-group">
+        <label for="description">商品説明 <span class="required">必須</span></label>
+        <textarea name="description" id="description" class="form-control" rows="4" placeholder="商品の説明を入力" required></textarea>
+    </div>
+
+    <!-- ボタン -->
+    <div class="form-group text-center">
+        <a href="{{ route('products.index') }}" class="btn btn-secondary">戻る</a>
+        <button type="submit" class="btn btn-warning">登録</button>
+    </div>
+    </form>
+</div>
 </div>
 @endsection
