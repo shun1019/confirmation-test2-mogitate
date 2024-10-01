@@ -9,10 +9,17 @@ class Product extends Model
 {
     use HasFactory;
 
-    // ホワイトリストで指定
+    // ホワイトリスト
     protected $fillable = [
         'name',
         'price',
         'image',
+        'season',
+        'description',
+    ];
+
+    // seasonはJSONとして保存されるため、配列にキャスト
+    protected $casts = [
+        'season' => 'array',
     ];
 }
