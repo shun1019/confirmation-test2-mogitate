@@ -31,11 +31,13 @@
                 @foreach($products as $product)
                 <div class="col-md-4 mb-4">
                     <div class="card product-card">
-                        <img src="{{ asset('storage/' . $product->image) }}" class="card-img-top" alt="{{ $product->name }}">
-                        <div class="card-body">
-                            <h5 class="card-title">{{ $product->name }}</h5>
-                            <p class="card-text">¥{{ number_format($product->price) }}</p>
-                        </div>
+                        <a href="{{ route('products.show', $product->id) }}" class="text-decoration-none">
+                            <img src="{{ asset('storage/' . $product->image) }}" class="card-img-top" alt="{{ $product->name }}">
+                            <div class="card-body">
+                                <h5 class="card-title">{{ $product->name }}</h5>
+                                <p class="card-text">¥{{ number_format($product->price) }}</p>
+                            </div>
+                        </a>
                     </div>
                 </div>
                 @endforeach

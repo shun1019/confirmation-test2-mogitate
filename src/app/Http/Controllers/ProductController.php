@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Product;
 use App\Models\Season;
 use Illuminate\Http\Request;
-use App\Http\Requests\UpdateProductRequest;
+use Illuminate\Support\Facades\Log; // Logクラスのインポート
 
 class ProductController extends Controller
 {
@@ -28,11 +28,11 @@ class ProductController extends Controller
     {
         $validated = $request->validate([
             'name' => 'required|string|max:255',
-            'price' => 'required|numeric|min:0',
+            'price' => 'required|numeric|min:0|max:10000',
             'image' => 'required|image|mimes:jpeg,png,jpg|max:2048',
             'season' => 'required|array',
             'season.*' => 'exists:seasons,id',
-            'description' => 'required|string|max:1000',
+            'description' => 'required|string|max:120',
         ]);
 
         // 画像の保存
@@ -50,6 +50,50 @@ class ProductController extends Controller
         $product->seasons()->attach($validated['season']);
 
         return redirect()->route('products.index')->with('success', '商品が登録されました。');
+    }
+
+    // 商品の詳細を表示する
+    public function show(Product $product)
+    {
+        $seasons = Season::all(); // 季節情報を取得
+        $productSeasons = $product->seasons->pluck('id')->toArray(); // 商品に関連する季節のIDを取得
+
+        return view('products.product_detail', compact('product', 'seasons', 'productSeasons'));
+    }
+
+    public function update(Request $request, Product $product)
+    {
+        // デバッグログを追加して、リクエストの内容を確認
+        Log::info('Request data:', $request->all());
+
+        $validated = $request->validate([
+            'name' => 'required|string|max:255',
+            'price' => 'required|numeric|min:0|max:10000',
+            'image' => 'nullable|image|mimes:jpeg,png,jpg|max:2048',
+            'season' => 'sometimes|array',  // sometimesを使用して、seasonが存在する場合のみバリデーションを行う
+            'season.*' => 'exists:seasons,id',
+            'description' => 'required|string|max:120',
+        ]);
+
+        Log::info('After validation:', $validated);
+
+        if ($request->hasFile('image')) {
+            // 画像の保存
+            $path = $request->file('image')->store('products', 'public');
+            $product->image = $path;
+        }
+
+        $product->name = $validated['name'];
+        $product->price = $validated['price'];
+        $product->description = $validated['description'];
+        $product->save();
+
+        // 中間テーブルの更新
+        $product->seasons()->sync($validated['season'] ?? []);
+
+        Log::info('Updated product:', $product->toArray());
+
+        return redirect()->route('products.index')->with('success', '商品が更新されました。');
     }
 
     // 商品を削除する

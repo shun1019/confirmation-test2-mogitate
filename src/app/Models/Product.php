@@ -14,12 +14,12 @@ class Product extends Model
         'name',
         'price',
         'image',
-        'season',
         'description',
     ];
 
-    // seasonはJSONとして保存されるため、配列にキャスト
-    protected $casts = [
-        'season' => 'array',
-    ];
+    // seasonsリレーションを定義
+    public function seasons()
+    {
+        return $this->belongsToMany(Season::class, 'product_season');
+    }
 }
