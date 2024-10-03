@@ -5,22 +5,23 @@ namespace App\Http\Controllers;
 use App\Models\Product;
 use App\Models\Season;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Log; // Logクラスのインポート
+use Illuminate\Support\Facades\Log;
 
 class ProductController extends Controller
 {
     // 商品一覧を表示する
     public function index(Request $request)
     {
-        $products = Product::paginate(6);
-        return view('products.product_index', compact('products'));
-    }
+        // クエリパラメータから検索キーワードとソート順を取得
+        $query = $request->input('query');
+        $sort = $request->input('sort');
 
-    // 商品登録フォームを表示する
-    public function create()
-    {
-        $seasons = Season::all(); // 季節情報を取得
-        return view('products.product_register', compact('seasons'));
+        // ローカルスコープを使用して検索とソートを実施
+        $products = Product::searchByName($query)
+            ->sortByPrice($sort)
+            ->paginate(6);
+
+        return view('products.product_index', compact('products'));
     }
 
     // 商品を保存する

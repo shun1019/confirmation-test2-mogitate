@@ -1,57 +1,63 @@
 /* コンテナ全体のスタイル */
 .container {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 20px;
-    display: flex; /* Flexbox を使用して左右のレイアウトに分ける */
+    max-width: 1300px;
+    display: flex;
     gap: 20px;
 }
 
 /* 左側の商品検索フォームのスタイル */
 .sidebar {
-    width: 25%;
-    background-color: #f9f9f9;
-    padding: 20px;
-    border-radius: 8px;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
     height: fit-content;
+    margin-bottom: 10px;
 }
 
 /* 商品一覧のタイトルのスタイル */
 h3 {
+    font-size: 25px;
     font-weight: bold;
-    margin-bottom: 20px;
+}
+
+.form-control {
+    max-width: 200px;
+    margin-bottom: 15px;
+    background-color: #fff;
+    padding: 10px 30px;
+    border-radius: 30px;
 }
 
 /* 検索ボタンのスタイル */
 .btn-warning {
+    padding: 10px 100px;
+    margin: 5px;
+    margin-bottom: 30px;
     background-color: #f8c94a;
     border: none;
-    color: #fff;
+    color: #474444;
     font-weight: bold;
-}
-
-.btn-warning:hover {
-    background-color: #f0b236;
-    color: #fff;
+    border-radius: 5px;
+    box-shadow: 0 2px 3px rgba(0, 0, 0, 0.1);
 }
 
 /* 追加ボタンのスタイル */
 .text-right {
     text-align: right;
-    margin-bottom: 20px;
+    margin-bottom: 30px;
     width: 100%;
 }
 
 .text-right .btn-warning {
+    font-size: 15px;
+    background-color: #fbb01a;
+    text-decoration: none;
     font-weight: bold;
-    padding: 10px 20px;
+    padding: 15px 25px;
     margin-bottom: 20px;
+    margin-right: 20px;
 }
 
 /* 右側の商品カードのスタイル */
 .products-container {
-    width: 75%;
+    width: 80%;
 }
 
 .row {
@@ -63,11 +69,12 @@ h3 {
 /* 商品カードのスタイル */
 .product-card {
     transition: transform 0.3s ease, box-shadow 0.3s ease;
-    border: none;
     border-radius: 8px;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
     overflow: hidden;
     width: calc(33.3333% - 20px);
+    text-decoration: none;
+    background-color: #fff;
 }
 
 .product-card:hover {
@@ -84,36 +91,28 @@ h3 {
 /* カードのボディスタイル */
 .card-body {
     display: flex;
-    padding: 15px;
-    background-color: #fff;
+    justify-content: space-between; /* 商品名と価格を左右に配置 */
+    align-items: center;
+    padding: 0 10px;
+    margin: 10px 5px;
+    height: 25px;
 }
 
 /* カードのタイトルとテキストのスタイル */
 .card-title {
-    font-size: 12px;
-    margin-bottom: 10px;
+    font-size: 16px;
+    color: #9d9c9c;
 }
 
 .card-text {
-    font-size: 1.1rem;
-    color: #666;
+    font-size: 16px;
+    color: #9d9c9c;
     font-weight: bold;
+    text-align: right;
 }
 
-/* ページネーションのスタイル */
-.pagination {
-    margin-top: 20px;
-    width: 100%;
-    display: flex;
-    justify-content: center;
-}
-
-.pagination .page-item .page-link {
-    color: #f8c94a;
-}
-
-.pagination .page-item.active .page-link {
-    background-color: #f8c94a;
-    border-color: #f8c94a;
-    color: #fff;
+/* カードリンクの装飾をなくす */
+.text-decoration-none {
+    text-decoration: none;
+    color: inherit;
 }

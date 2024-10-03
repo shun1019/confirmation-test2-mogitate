@@ -27,7 +27,7 @@
     <!-- 右側の商品カード -->
     <div class="products-container">
         <div class="text-right">
-            <a href="{{ route('products.create') }}" class="btn btn-warning">+ 商品を追加</a>
+            <a href="{{ route('products.create') }}" class="btn btn-warning product-add-btn">+ 商品を追加</a>
         </div>
         <div class="row">
             @foreach($products as $product)
