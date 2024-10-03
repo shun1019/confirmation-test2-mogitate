@@ -2,7 +2,6 @@
 .container {
     max-width: 1300px;
     display: flex;
-    gap: 20px;
 }
 
 /* 左側の商品検索フォームのスタイル */
@@ -12,17 +11,54 @@
 }
 
 /* 商品一覧のタイトルのスタイル */
-h3 {
+.title {
     font-size: 25px;
     font-weight: bold;
 }
 
 .form-control {
-    max-width: 200px;
+    width: 210px;
     margin-bottom: 15px;
     background-color: #fff;
-    padding: 10px 30px;
-    border-radius: 30px;
+    padding: 10px 10px;
+    border-radius: 20px;
+}
+
+/* 並び替えのドロップダウンメニューのスタイル */
+.form-control#price_order {
+    max-width: 200px;
+    padding: 10px 10px;
+    margin-top: 15px;
+    margin-bottom: 15px;
+    background-color: #fff;
+    border-radius: 5px;
+}
+
+/* 並び替えタグのスタイル */
+.sort-tag {
+    width: 120px;
+    align-items: center;
+    text-align: center;
+    border: 1px solid #f8c94a;
+    background-color: #e6e6e6;
+    color: #333;
+    padding: 5px 10px;
+    border-radius: 20px;
+    font-size: 0.9rem;
+}
+
+.sort-tag .remove-sort {
+    background-color: transparent;
+    border: none;
+    color: #333;
+    font-size: 1.1rem;
+    font-weight: bold;
+    cursor: pointer;
+    text-decoration: none;
+}
+
+.sort-tag .remove-sort:hover {
+    color: #000;
 }
 
 /* 検索ボタンのスタイル */
@@ -115,4 +151,54 @@ h3 {
 .text-decoration-none {
     text-decoration: none;
     color: inherit;
+}
+
+/* ページネーションのスタイル */
+.pagination {
+    margin-top: 20px;
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    list-style: none;
+}
+
+.pagination .page-item {
+    list-style: none;
+}
+
+.pagination .page-item .page-link {
+    background-color: #fff;
+    border: none;
+    font-size: 16px;
+    border-radius: 50%;
+    padding: 10px 15px;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    text-decoration: none;
+}
+
+.pagination .page-item.active .page-link {
+    background-color: #f8c94a;
+    color: #fff;
+    font-weight: bold;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.15);
+}
+
+.pagination .page-item .page-link:hover {
+    background-color: #f8c94a;
+    color: #fff;
+    text-decoration: none;
+}
+
+.pagination .page-item:first-child .page-link,
+.pagination .page-item:last-child .page-link {
+    border-radius: 50%;
+    width: 13px;
+    font-size: 16px;
+    border-radius: 50%;
+    padding: 10px 15px;
+    text-decoration: none;
 }

@@ -8,19 +8,32 @@
 <div class="container">
     <!-- 左側の検索フォーム -->
     <div class="sidebar">
-        <h3>商品一覧</h3>
+        <h3 class="title">商品一覧</h3>
         <form action="{{ route('products.index') }}" method="GET" class="mb-3">
             <div class="form-group">
-                <input type="text" name="query" class="form-control" placeholder="商品名で検索">
+                <input type="text" name="query" value="{{ request('query') }}" class="form-control" placeholder="商品名で検索">
             </div>
             <button type="submit" class="btn btn-warning w-100">検索</button>
         </form>
         <div class="form-group">
             <label for="price_order">価格順で表示</label>
             <select id="price_order" class="form-control" onchange="location.href=this.value;">
-                <option value="?sort=asc">価格で昇順</option>
-                <option value="?sort=desc">価格で降順</option>
+                <option value="" disabled selected>価格の並び替え</option>
+                <option value="{{ route('products.index', array_merge(request()->query(), ['sort' => 'desc'])) }}" {{ request('sort') == 'desc' ? 'selected' : '' }}>
+                    高い順に表示
+                </option>
+                <option value="{{ route('products.index', array_merge(request()->query(), ['sort' => 'asc'])) }}" {{ request('sort') == 'asc' ? 'selected' : '' }}>
+                    低い順に表示
+                </option>
             </select>
+
+            <!-- 並び替えタグの表示 -->
+            @if(request('sort'))
+            <div class="sort-tag">
+                <span>{{ request('sort') == 'asc' ? '高い順に表示' : '低い順に表示' }}</span>
+                <a href="{{ route('products.index', \Illuminate\Support\Arr::except(request()->query(), 'sort')) }}" class="remove-sort">×</a>
+            </div>
+            @endif
         </div>
     </div>
 
@@ -45,7 +58,7 @@
             @endforeach
         </div>
         <div class="pagination justify-content-center">
-            {{ $products->links() }}
+            {{ $products->links('pagination::bootstrap-4') }}
         </div>
     </div>
 </div>

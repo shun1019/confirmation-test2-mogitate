@@ -12,14 +12,19 @@ class ProductController extends Controller
     // 商品一覧を表示する
     public function index(Request $request)
     {
-        // クエリパラメータから検索キーワードとソート順を取得
-        $query = $request->input('query');
-        $sort = $request->input('sort');
+        $query = Product::query();
 
-        // ローカルスコープを使用して検索とソートを実施
-        $products = Product::searchByName($query)
-            ->sortByPrice($sort)
-            ->paginate(6);
+        if ($request->has('sort')) {
+            $sort = $request->query('sort');
+            $query->orderBy('price', $sort == 'asc' ? 'asc' : 'desc');
+        }
+
+        if ($request->has('query')) {
+            $queryParam = $request->input('query');
+            $query->search($queryParam);
+        }
+
+        $products = $query->paginate(6);
 
         return view('products.product_index', compact('products'));
     }
