@@ -8,24 +8,15 @@
 <div class="container">
     <div class="detail-form mt-5">
         <a href="{{ route('products.index') }}" class="back-link">商品一覧 > {{ $product->name }}</a>
-
-        <!-- バリデーションエラーメッセージの表示 -->
-        @if ($errors->any())
-        <div class="alert alert-danger">
-            <ul>
-                @foreach ($errors->all() as $error)
-                <li>{{ $error }}</li>
-                @endforeach
-            </ul>
-        </div>
-        @endif
-
         <div class="row mt-3">
             <div class="col-md-5">
                 <img src="{{ asset('storage/' . $product->image) }}" alt="{{ $product->name }}" class="img-fluid">
                 <div class="form-group mt-3">
                     <label for="image">商品画像</label>
                     <input type="file" name="image" id="image" class="form-control-file">
+                    @error('image')
+                    <div class="text-danger">{{ $message }}</div>
+                    @enderror
                 </div>
             </div>
             <div class="col-md-7">
@@ -36,13 +27,19 @@
                     <!-- 商品名 -->
                     <div class="form-group">
                         <label for="name">商品名</label>
-                        <input type="text" name="name" id="name" class="form-control" value="{{ old('name', $product->name) }}" placeholder="商品名を入力" required>
+                        <input type="text" name="name" id="name" class="form-control" value="{{ old('name', $product->name) }}" >
+                        @error('name')
+                        <span class="text-danger">{{ $message }}</span>
+                        @enderror
                     </div>
 
                     <!-- 価格 -->
                     <div class="form-group">
                         <label for="price">値段</label>
-                        <input type="number" name="price" id="price" class="form-control" value="{{ old('price', $product->price) }}" placeholder="値段を入力" required>
+                        <input type="number" name="price" id="price" class="form-control" value="{{ old('price', $product->price) }}" >
+                        @error('price')
+                        <span class="text-danger">{{ $message }}</span>
+                        @enderror
                     </div>
 
                     <!-- 季節 -->
@@ -57,12 +54,18 @@
                             </div>
                             @endforeach
                         </div>
+                        @error('season')
+                        <span class="text-danger">{{ $message }}</span>
+                        @enderror
                     </div>
 
                     <!-- 商品説明 -->
                     <div class="form-group">
                         <label for="description">商品説明</label>
-                        <textarea name="description" id="description" class="form-control" rows="4" placeholder="商品の説明を入力">{{ old('description', $product->description) }}</textarea>
+                        <textarea name="description" id="description" class="form-control" rows="4">{{ old('description', $product->description) }}</textarea>
+                        @error('description')
+                        <span class="text-danger">{{ $message }}</span>
+                        @enderror
                     </div>
 
                     <!-- ボタン -->

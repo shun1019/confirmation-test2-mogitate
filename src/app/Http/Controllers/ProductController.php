@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Product;
 use App\Models\Season;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Log;
+use App\Http\Requests\UpdateProductRequest;
 
 class ProductController extends Controller
 {
@@ -21,7 +21,7 @@ class ProductController extends Controller
 
         if ($request->has('query')) {
             $queryParam = $request->input('query');
-            $query->search($queryParam);
+            $query->where('name', 'like', '%' . $queryParam . '%');
         }
 
         $products = $query->paginate(6);
@@ -29,8 +29,15 @@ class ProductController extends Controller
         return view('products.product_index', compact('products'));
     }
 
+    // 商品登録フォームを表示する
+    public function create()
+    {
+        $seasons = Season::all(); // 季節情報を取得
+        return view('products.product_register', compact('seasons'));
+    }
+
     // 商品を保存する
-    public function store(Request $request)
+    public function store(UpdateProductRequest $request)
     {
         $validated = $request->validate([
             'name' => 'required|string|max:255',
@@ -67,28 +74,19 @@ class ProductController extends Controller
         return view('products.product_detail', compact('product', 'seasons', 'productSeasons'));
     }
 
-    public function update(Request $request, Product $product)
+    // 商品を更新する
+    public function update(UpdateProductRequest $request, Product $product)
     {
-        // デバッグログを追加して、リクエストの内容を確認
-        Log::info('Request data:', $request->all());
+        // フォームリクエストによるバリデーションの結果を利用
+        $validated = $request->validated();
 
-        $validated = $request->validate([
-            'name' => 'required|string|max:255',
-            'price' => 'required|numeric|min:0|max:10000',
-            'image' => 'nullable|image|mimes:jpeg,png,jpg|max:2048',
-            'season' => 'sometimes|array',  // sometimesを使用して、seasonが存在する場合のみバリデーションを行う
-            'season.*' => 'exists:seasons,id',
-            'description' => 'required|string|max:120',
-        ]);
-
-        Log::info('After validation:', $validated);
-
+        // 画像の保存
         if ($request->hasFile('image')) {
-            // 画像の保存
             $path = $request->file('image')->store('products', 'public');
             $product->image = $path;
         }
 
+        // 商品情報の更新
         $product->name = $validated['name'];
         $product->price = $validated['price'];
         $product->description = $validated['description'];
@@ -96,8 +94,6 @@ class ProductController extends Controller
 
         // 中間テーブルの更新
         $product->seasons()->sync($validated['season'] ?? []);
-
-        Log::info('Updated product:', $product->toArray());
 
         return redirect()->route('products.index')->with('success', '商品が更新されました。');
     }

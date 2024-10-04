@@ -1,22 +1,19 @@
 body {
-    background-color: #fff;
+    margin: 0;
+    padding: 0;
 }
 
 .header {
-    padding: 0 3px;
+    background-color: #fff;
 }
 
 .header__logo {
     font-size: 1.5rem;
     color: #f8b400;
     text-decoration: none;
-    transition: color 0.3s ease;
-}
-
-.header__logo:hover {
-    color: #ffca2c;
 }
 
 .content {
     padding: 40px 20px;
+    background-color: #f4f4f4;
 }

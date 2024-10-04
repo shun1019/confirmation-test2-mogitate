@@ -10,14 +10,14 @@
 </head>
 
 <body>
-    <div class="app">
-        <header class="header">
-            <h1 class="header__logo">mogitate</h1>
-            @yield('link')
-        </header>
-        <div class="content">
-            @yield('content')
-        </div>
+    <header class="header">
+        <a class="header__logo" href="/products">
+            mogitate
+        </a>
+        @yield('link')
+    </header>
+    <div class="content">
+        @yield('content')
     </div>
 </body>
 
