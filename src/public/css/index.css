@@ -6,7 +6,6 @@
 
 /* 左側の商品検索フォームのスタイル */
 .sidebar {
-    height: fit-content;
     margin-bottom: 10px;
 }
 
@@ -18,6 +17,7 @@
 
 .form-control {
     width: 210px;
+    border: 1px solid #ccc;
     margin-bottom: 15px;
     background-color: #fff;
     padding: 10px 10px;
@@ -25,8 +25,11 @@
 }
 
 /* 並び替えのドロップダウンメニューのスタイル */
-.form-control#price_order {
-    max-width: 200px;
+.form-control-inner {
+    width: 210px;
+    border: 1px solid #ccc;
+    margin-bottom: 15px;
+    background-color: #fff;
     padding: 10px 10px;
     margin-top: 15px;
     margin-bottom: 15px;
@@ -120,6 +123,7 @@
 
 /* カード画像のスタイル */
 .card-img-top {
+    width: 100%;
     height: 200px;
     object-fit: cover;
 }
@@ -127,7 +131,7 @@
 /* カードのボディスタイル */
 .card-body {
     display: flex;
-    justify-content: space-between; /* 商品名と価格を左右に配置 */
+    justify-content: space-between;
     align-items: center;
     padding: 0 10px;
     margin: 10px 5px;
@@ -156,10 +160,10 @@
 /* ページネーションのスタイル */
 .pagination {
     margin-top: 20px;
+    margin-right: 30px;
     display: flex;
     justify-content: center;
     gap: 10px;
-    list-style: none;
 }
 
 .pagination .page-item {
@@ -195,10 +199,8 @@
 
 .pagination .page-item:first-child .page-link,
 .pagination .page-item:last-child .page-link {
-    border-radius: 50%;
     width: 13px;
     font-size: 16px;
     border-radius: 50%;
-    padding: 10px 15px;
     text-decoration: none;
 }

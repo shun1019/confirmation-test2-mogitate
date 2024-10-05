@@ -15,7 +15,7 @@
                     <label for="image">商品画像</label>
                     <input type="file" name="image" id="image" class="form-control-file">
                     @error('image')
-                    <div class="text-danger">{{ $message }}</div>
+                    <div class="form-error">{{ $message }}</div>
                     @enderror
                 </div>
             </div>
@@ -27,18 +27,18 @@
                     <!-- 商品名 -->
                     <div class="form-group">
                         <label for="name">商品名</label>
-                        <input type="text" name="name" id="name" class="form-control" value="{{ old('name', $product->name) }}" >
+                        <input type="text" name="name" id="name" class="form-control" value="{{ old('name', $product->name) }}">
                         @error('name')
-                        <span class="text-danger">{{ $message }}</span>
+                        <span class="form-error">{{ $message }}</span>
                         @enderror
                     </div>
 
                     <!-- 価格 -->
                     <div class="form-group">
                         <label for="price">値段</label>
-                        <input type="number" name="price" id="price" class="form-control" value="{{ old('price', $product->price) }}" >
+                        <input type="number" name="price" id="price" class="form-control" value="{{ old('price', $product->price) }}">
                         @error('price')
-                        <span class="text-danger">{{ $message }}</span>
+                        <span class="form-error">{{ $message }}</span>
                         @enderror
                     </div>
 
@@ -55,7 +55,7 @@
                             @endforeach
                         </div>
                         @error('season')
-                        <span class="text-danger">{{ $message }}</span>
+                        <span class="form-error">{{ $message }}</span>
                         @enderror
                     </div>
 
@@ -64,7 +64,7 @@
                         <label for="description">商品説明</label>
                         <textarea name="description" id="description" class="form-control" rows="4">{{ old('description', $product->description) }}</textarea>
                         @error('description')
-                        <span class="text-danger">{{ $message }}</span>
+                        <span class="form-error">{{ $message }}</span>
                         @enderror
                     </div>
 

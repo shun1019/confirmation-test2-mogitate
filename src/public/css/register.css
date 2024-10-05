@@ -19,13 +19,17 @@
     margin-bottom: 25px;
 }
 
-label {
+.form-label {
     font-weight: bold;
     display: block;
     margin-bottom: 5px;
     color: #333;
 }
 
+.required {
+    color: red;
+    font-weight: bold;
+}
 
 .form-control, .form-control-file {
     border-radius: 5px;
@@ -86,7 +90,7 @@ label {
 }
 
 /* バリデーションエラーメッセージのスタイル */
-.text-danger {
+.form-error {
     color: #ff0000;
     font-size: 0.9rem;
     margin-top: 5px;

@@ -17,7 +17,7 @@
         </form>
         <div class="form-group">
             <label for="price_order">価格順で表示</label>
-            <select id="price_order" class="form-control" onchange="location.href=this.value;">
+            <select id="price_order" class="form-control-inner" onchange="location.href=this.value;">
                 <option value="" disabled selected>価格の並び替え</option>
                 <option value="{{ route('products.index', array_merge(request()->query(), ['sort' => 'desc'])) }}" {{ request('sort') == 'desc' ? 'selected' : '' }}>
                     高い順に表示
@@ -30,7 +30,7 @@
             <!-- 並び替えタグの表示 -->
             @if(request('sort'))
             <div class="sort-tag">
-                <span>{{ request('sort') == 'asc' ? '高い順に表示' : '低い順に表示' }}</span>
+                <span>{{ request('sort') == 'asc' ? '低い順に表示' : '高い順に表示' }}</span>
                 <a href="{{ route('products.index', \Illuminate\Support\Arr::except(request()->query(), 'sort')) }}" class="remove-sort">×</a>
             </div>
             @endif
@@ -57,7 +57,7 @@
             </div>
             @endforeach
         </div>
-        <div class="pagination justify-content-center">
+        <div class="pagination">
             {{ $products->links('pagination::bootstrap-4') }}
         </div>
     </div>
