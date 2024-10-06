@@ -15,7 +15,6 @@ class ProductController extends Controller
     {
         $query = Product::query();
 
-        // 並び替え機能はindexメソッドで管理
         if ($request->has('sort')) {
             $sort = $request->query('sort');
             $query->orderBy('price', $sort == 'asc' ? 'asc' : 'desc');
