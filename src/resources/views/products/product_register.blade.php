@@ -65,7 +65,7 @@
             </div>
 
             <!-- ボタン -->
-            <div class="form-group text-center">
+            <div class="form-group__btn">
                 <a href="{{ route('products.index') }}" class="btn btn-secondary">戻る</a>
                 <button type="submit" class="btn btn-warning">登録</button>
             </div>

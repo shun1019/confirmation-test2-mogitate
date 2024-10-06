@@ -7,7 +7,11 @@
 @section('content')
 <div class="container">
     <div class="detail-form mt-5">
-        <a href="{{ route('products.index') }}" class="back-link">商品一覧 > {{ $product->name }}</a>
+        <div class="detail-heading">
+            <a href="{{ route('products.index') }}" class="back-link">商品一覧</a>
+            <span class="detail-heading__name">></span>
+            <span>{{ $product->name }}</span>
+        </div>
         <div class="row mt-3">
             <div class="col-md-5">
                 <img src="{{ asset('storage/' . $product->image) }}" alt="{{ $product->name }}" class="img-fluid">
@@ -69,7 +73,7 @@
                     </div>
 
                     <!-- ボタン -->
-                    <div class="form-group text-center">
+                    <div class="form-group__btn">
                         <a href="{{ route('products.index') }}" class="btn btn-secondary">戻る</a>
                         <button type="submit" class="btn btn-warning">変更を保存</button>
                     </div>
@@ -78,7 +82,7 @@
                 <form action="{{ route('products.destroy', $product->id) }}" method="POST" class="mt-3">
                     @csrf
                     @method('DELETE')
-                    <button type="submit" class="btn btn-danger">削除</button>
+                    <button type="submit" class="btn btn-delete">削除</button>
                 </form>
             </div>
         </div>
