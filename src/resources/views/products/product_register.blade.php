@@ -7,7 +7,7 @@
 @section('content')
 <div class="container">
     <div class="register-form mt-5">
-        <h3 class="text-center">商品登録</h3>
+        <h2 class="text-center">商品登録</h2>
 
         <form action="{{ route('products.store') }}" method="POST" enctype="multipart/form-data">
             @csrf
@@ -41,7 +41,7 @@
 
             <!-- 季節 -->
             <div class="form-group">
-                <label class="form-label">季節 <span class="required">必須</span> <small>複数選択可</small></label>
+                <label class="form-label">季節 <span class="required">必須</span> <small class="select-season__label">複数選択可</small></label>
                 <div class="season-checkboxes">
                     @foreach($seasons as $season)
                     <div class="form-check form-check-inline">

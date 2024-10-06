@@ -1,16 +1,16 @@
-/* コンテナ全体のスタイル */
 .container {
     max-width: 1300px;
     display: flex;
 }
 
-/* 左側の商品検索フォームのスタイル */
+/* 商品検索フォームのスタイル */
 .sidebar {
     margin-bottom: 10px;
+    margin-right: -50px;
 }
 
-/* 商品一覧のタイトルのスタイル */
 .title {
+    margin-top: -5px;
     font-size: 25px;
     font-weight: bold;
 }
@@ -24,9 +24,8 @@
     border-radius: 20px;
 }
 
-/* 並び替えのドロップダウンメニューのスタイル */
 .form-control-inner {
-    width: 210px;
+    width: 230px;
     border: 1px solid #ccc;
     margin-bottom: 15px;
     background-color: #fff;
@@ -37,7 +36,6 @@
     border-radius: 5px;
 }
 
-/* 並び替えタグのスタイル */
 .sort-tag {
     width: 120px;
     align-items: center;
@@ -51,20 +49,21 @@
 }
 
 .sort-tag .remove-sort {
-    background-color: transparent;
-    border: none;
-    color: #333;
-    font-size: 1.1rem;
-    font-weight: bold;
+    height: 30px;
+    width: 30px;
+    line-height: 30px;
+    border: 1px solid #333;
+    border-radius: 50%;
     cursor: pointer;
+    color: #333;
     text-decoration: none;
+    text-align: center;
 }
 
 .sort-tag .remove-sort:hover {
     color: #000;
 }
 
-/* 検索ボタンのスタイル */
 .btn-warning {
     padding: 10px 100px;
     margin: 5px;
@@ -74,10 +73,10 @@
     color: #474444;
     font-weight: bold;
     border-radius: 5px;
+    cursor: pointer;
     box-shadow: 0 2px 3px rgba(0, 0, 0, 0.1);
 }
 
-/* 追加ボタンのスタイル */
 .text-right {
     text-align: right;
     margin-bottom: 30px;
@@ -86,7 +85,7 @@
 
 .text-right .btn-warning {
     font-size: 15px;
-    background-color: #fbb01a;
+    background-color: #f7a502;
     text-decoration: none;
     font-weight: bold;
     padding: 15px 25px;
@@ -94,7 +93,7 @@
     margin-right: 20px;
 }
 
-/* 右側の商品カードのスタイル */
+/* 商品カードのスタイル */
 .products-container {
     width: 80%;
 }
@@ -105,7 +104,6 @@
     gap: 20px;
 }
 
-/* 商品カードのスタイル */
 .product-card {
     transition: transform 0.3s ease, box-shadow 0.3s ease;
     border-radius: 8px;
@@ -121,14 +119,12 @@
     box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2);
 }
 
-/* カード画像のスタイル */
 .card-img-top {
     width: 100%;
     height: 200px;
     object-fit: cover;
 }
 
-/* カードのボディスタイル */
 .card-body {
     display: flex;
     justify-content: space-between;
@@ -138,7 +134,6 @@
     height: 25px;
 }
 
-/* カードのタイトルとテキストのスタイル */
 .card-title {
     font-size: 16px;
     color: #9d9c9c;
@@ -151,7 +146,6 @@
     text-align: right;
 }
 
-/* カードリンクの装飾をなくす */
 .text-decoration-none {
     text-decoration: none;
     color: inherit;

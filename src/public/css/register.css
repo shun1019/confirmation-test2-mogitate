@@ -1,17 +1,17 @@
 .container {
-    max-width: 600px;
-    margin: auto;
+    width: 800px;
+    align-items: center;
+    justify-content: center;
+    padding: 20px 200px;
 }
 
 .register-form {
-    background-color: #f9f9f9;
     padding: 40px;
 }
 
-.register-form h3 {
+.register-form h2 {
     font-weight: bold;
     margin-bottom: 30px;
-    text-align: center;
     color: #333;
 }
 
@@ -27,11 +27,14 @@
 }
 
 .required {
-    color: red;
-    font-weight: bold;
+    margin-left: 10px;
+    font-size: 15px;
+    padding: 2px;
+    color: #fff;
+    background-color: #ff0000;
 }
 
-.form-control, .form-control-file {
+.form-control {
     border-radius: 5px;
     border: 1px solid #ccc;
     padding: 10px;
@@ -40,7 +43,7 @@
 
 .form-control::placeholder {
     color: #a9a9a9;
-    opacity: 1; /* プレースホルダーの不透明度 */
+    opacity: 1;
 }
 
 .form-control-file {

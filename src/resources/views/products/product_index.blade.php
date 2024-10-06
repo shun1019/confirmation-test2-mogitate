@@ -9,7 +9,7 @@
     <!-- 左側の検索フォーム -->
     <div class="sidebar">
         <h3 class="title">商品一覧</h3>
-        <form action="{{ route('products.index') }}" method="GET" class="mb-3">
+        <form action="{{ route('products.search') }}" method="GET" class="mb-3">
             <div class="form-group">
                 <input type="text" name="query" value="{{ request('query') }}" class="form-control" placeholder="商品名で検索">
             </div>

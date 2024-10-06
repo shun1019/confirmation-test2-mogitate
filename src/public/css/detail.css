@@ -1,86 +1,146 @@
+/* detail.css */
+
+/* コンテナ設定 */
 .container {
-    max-width: 1200px;
+    max-width: 800px;
     margin: 0 auto;
     padding: 20px;
-    background-color: #ffffff;
+    background-color: #f9f9f9;
+}
+
+/* 商品詳細フォーム */
+.detail-form {
+    display: flex;
+    flex-direction: column;
+}
+
+.back-link {
+    color: #007bff;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.back-link:hover {
+    text-decoration: underline;
+}
+
+/* 行の配置 */
+.row {
+    display: flex;
+    margin-top: 20px;
+}
+
+/* 画像部分の設定 */
+.col-md-5 {
+    flex: 1;
+    margin-right: 20px;
+}
+
+.img-fluid {
+    max-width: 100%;
+    height: auto;
+    border-radius: 5px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    border-radius: 8px;
 }
 
-.register-form {
-    padding: 20px;
-    background-color: #ffffff;
+/* 商品画像の入力フォーム */
+.form-group.mt-3 {
+    margin-top: 15px;
 }
 
+.form-control-file {
+    margin-top: 10px;
+}
+
+/* 商品情報部分の設定 */
+.col-md-7 {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+/* フォーム要素のスタイル */
 .form-group {
     margin-bottom: 20px;
 }
 
-.form-group label {
+label {
     font-weight: bold;
+    margin-bottom: 5px;
+    display: block;
 }
 
 .form-control {
     width: 100%;
     padding: 10px;
-    margin-top: 5px;
-    border: 1px solid #ddd;
-    border-radius: 4px;
-    color: #777;
+    border: 1px solid #ccc;
+    border-radius: 5px;
 }
 
-.form-control-file {
+textarea.form-control {
+    height: auto;
+    resize: vertical;
+}
+
+/* エラーメッセージのスタイル */
+.form-error {
+    color: #e3342f;
+    font-size: 0.9em;
     margin-top: 5px;
 }
 
+/* 季節チェックボックス */
 .season-checkboxes {
-    margin-top: 10px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
 }
 
-.form-check {
-    margin-right: 10px;
+.form-check-inline {
+    margin-right: 15px;
 }
 
-.required {
-    color: red;
-    font-weight: bold;
+.form-check-input {
+    margin-right: 5px;
+}
+
+/* ボタンのスタイル */
+.form-group.text-center {
+    margin-top: 30px;
 }
 
 .btn {
     padding: 10px 20px;
-    border-radius: 4px;
-    text-decoration: none;
-    transition: background-color 0.3s ease;
+    border-radius: 5px;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s;
 }
 
 .btn-secondary {
-    background-color: #cccccc;
-    color: #ffffff;
-    border: none;
+    background-color: #e0e0e0;
+    color: #000;
 }
 
 .btn-secondary:hover {
-    background-color: #b3b3b3;
+    background-color: #d5d5d5;
 }
 
 .btn-warning {
-    background-color: #ffc107;
-    color: #ffffff;
-    border: none;
+    background-color: #f8b400;
+    color: #fff;
 }
 
 .btn-warning:hover {
-    background-color: #e0a800;
+    background-color: #ffca2c;
 }
 
-.text-center {
-    text-align: center;
+.btn-danger {
+    background-color: #e3342f;
+    color: #fff;
+    margin-top: 10px;
 }
 
-/* バリデーションエラーメッセージのスタイル */
-.form-error {
-    color: #ff0000;
-    font-size: 0.9rem;
-    margin-top: 5px;
-    display: block;
+.btn-danger:hover {
+    background-color: #cc1f1a;
 }
