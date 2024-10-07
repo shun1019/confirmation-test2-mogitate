@@ -2,17 +2,17 @@
 
 ## 環境構築
 ### Docker ビルド
--   リポジトリをクローンします:
+1.  リポジトリをクローンします:
     ```bash
-    git clone git@github.com:shun1019/confirmation-test2-mogitate.git
+    'git clone git@github.com:shun1019/confirmation-test2-mogitate.git'
     ```
--   DockerDesktop アプリを立ち上げる:
+2.  DockerDesktop アプリを立ち上げる:
     ```bash
     'docker-compose up -d --build'
     ```
--   > _Mac の M1・M2 チップの PC の場合、`no matching manifest for linux/arm64/v8 in the manifest list entries`の
+3.  > _Mac の M1・M2 チップの PC の場合、`no matching manifest for linux/arm64/v8 in the manifest list entries`の
     > メッセージが表示されビルドができないことがあります。
-    > エラーが発生する場合は、docker-compose.yml ファイルの「mysql,phpmyadmin」内に「platform」の項目を追加で記載してください_
+    > エラーが発生する場合は、docker-compose.yml ファイルの「mysql,phpmyadmin」内に「platform」の項目を追加で記載してください。
 
 ```bash
 mysql:
