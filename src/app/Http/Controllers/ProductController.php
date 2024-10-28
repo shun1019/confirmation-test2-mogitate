@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Product;
 use App\Models\Season;
 use Illuminate\Http\Request;
+use App\Http\Requests\StoreProductRequest;
 use App\Http\Requests\UpdateProductRequest;
 use Illuminate\Support\Facades\Log;
 
@@ -15,9 +16,16 @@ class ProductController extends Controller
     {
         $query = Product::query();
 
+        // 商品名での検索
+        if ($request->has('query')) {
+            $queryParam = $request->input('query');
+            $query->where('name', 'like', '%' . $queryParam . '%');
+        }
+
+        // 価格順でのソート
         if ($request->has('sort')) {
             $sort = $request->query('sort');
-            $query->orderBy('price', $sort == 'asc' ? 'asc' : 'desc');
+            $query->orderBy('price', $sort === 'asc' ? 'asc' : 'desc');
         }
 
         $products = $query->paginate(6)->appends($request->query());
@@ -48,7 +56,7 @@ class ProductController extends Controller
     }
 
     // 商品を保存する
-    public function store(UpdateProductRequest $request)
+    public function store(StoreProductRequest $request)
     {
         $validated = $request->validated();
 
