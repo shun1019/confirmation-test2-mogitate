@@ -52,8 +52,7 @@
                         <div class="season-checkboxes">
                             @foreach($seasons as $season)
                             <div class="form-check form-check-inline">
-                                <input class="form-check-input" type="checkbox" name="season[]" id="season_{{ $season->id }}" value="{{ $season->id }}"
-                                    {{ in_array($season->id, old('season', $productSeasons)) ? 'checked' : '' }}>
+                                <input class="form-check-input" type="checkbox" name="season[]" id="season_{{ $season->id }}" value="{{ $season->id }}">
                                 <label class="form-check-label" for="season_{{ $season->id }}">{{ $season->name }}</label>
                             </div>
                             @endforeach
